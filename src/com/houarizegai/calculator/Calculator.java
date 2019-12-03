@@ -16,15 +16,14 @@ public class Calculator {
 
     private JFrame window; // This is Main Window
     private JTextField inText, affichageCalc; // Input Text
-    private JButton btnC, btnBack, btnMod, btnDiv, btn7, btn8, btn9,
-            btnMul, btn4, btn5, btn6, btnSub, btn1, btn2, btn3, btnAdd, btnPoint, btn0, btnEqual, choixColor;
+    private JButton btnC, btnBack, btnMod, btnDiv, btnMul, btnSub, btnAdd, btnPoint, btnEqual, choixColor;
     private List<JButton> numBtn;
     private char opt = ' ';             // Storage Oparator
     private boolean go = true,          // Faire Calcule Avec Opt != (=)
             addWrite = true;    // RacordÃ© des Nombres dans l'Affichage
     private double val = 0; // Storage Values For Calcule
     private boolean bool = false;
-    private int num=1;
+    //private int num=1;
     /*
         Mx Calculator: 
         X = Ligne
@@ -256,25 +255,7 @@ public class Calculator {
         });
         window.add(btnPoint);
         
-        btn0 = new JButton("0");
-        btn0.setBounds(x[1],y[5],wBtn,hBtn);
-        btn0.setFont(btnFont);
-        btn0.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        btn0.addActionListener(event -> {
-            repaintFont();
-            if (addWrite) {
-                if (Pattern.matches("[0]*", inText.getText())) {
-                    inText.setText("0");
-                } else {
-                    inText.setText(inText.getText() + "0");
-                }
-            } else {
-                inText.setText("0");
-                addWrite = true;
-            }
-            go = true;
-        });
-        window.add(btn0);
+
         
         btnEqual = new JButton("=");
         btnEqual.setBounds(x[2],y[5],2*wBtn+10,hBtn);
@@ -299,10 +280,30 @@ public class Calculator {
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // If Click into The Red Button => End The Processus
         window.setVisible(true);
         
-        
+        //¼Æ¦r«ö¶sªì©l¤Æ
+        JButton btn0 = new JButton("0");
+        btn0.setBounds(x[1],y[5],wBtn,hBtn);
+        btn0.setFont(btnFont);
+        btn0.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btn0.addActionListener(event -> {
+            repaintFont();
+            if (addWrite) {
+                if (Pattern.matches("[0]*", inText.getText())) {
+                    inText.setText("0");
+                } else {
+                    inText.setText(inText.getText() + "0");
+                }
+            } else {
+                inText.setText("0");
+                addWrite = true;
+            }
+            go = true;
+        });
+        numBtn.add(btn0);
+        window.add(btn0);
+        int num=1;
     	for(int i=4;i>1;--i) {
     		for(int j=0;j<3;++j) {
-    			System.out.print(num);
     			JButton btn = new JButton(Integer.toString(num));
                 btn.setBounds(x[j],y[i],wBtn,hBtn);
                 btn.setFont(btnFont);
@@ -364,7 +365,7 @@ public class Calculator {
             btnSub.setBackground(null);
             btnAdd.setBackground(null);
             btnEqual.setBackground(null);
-            btn0.setBackground(null);
+            /*btn0.setBackground(null);
             btn1.setBackground(null);
             btn2.setBackground(null);
             btn3.setBackground(null);
@@ -373,7 +374,7 @@ public class Calculator {
             btn6.setBackground(null);
             btn7.setBackground(null);
             btn8.setBackground(null);
-            btn9.setBackground(null);
+            btn9.setBackground(null);*/
             btnPoint.setBackground(null);
 
             btnC.setForeground(Color.BLACK);
@@ -398,7 +399,7 @@ public class Calculator {
             btnSub.setBackground(Color.PINK);
             btnAdd.setBackground(Color.PINK);
             btnEqual.setBackground(Color.BLUE);
-            btn0.setBackground(Color.WHITE);
+            /*btn0.setBackground(Color.WHITE);
             btn1.setBackground(Color.WHITE);
             btn2.setBackground(Color.WHITE);
             btn3.setBackground(Color.WHITE);
@@ -407,7 +408,7 @@ public class Calculator {
             btn6.setBackground(Color.WHITE);
             btn7.setBackground(Color.WHITE);
             btn8.setBackground(Color.WHITE);
-            btn9.setBackground(Color.WHITE);
+            btn9.setBackground(Color.WHITE);*/
             btnPoint.setBackground(Color.WHITE);
 
             btnC.setForeground(Color.WHITE);
