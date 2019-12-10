@@ -216,7 +216,7 @@ public class Calculator {
         });
         window.add(btnSub);
         
-        btnAdd = new JButton("+");
+       /* btnAdd = new JButton("+");
         btnAdd.setBounds(x[3], y[4], wBtn, hBtn);
         btnAdd.setFont(btnFont);
         btnAdd.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -237,7 +237,9 @@ public class Calculator {
                     opt = '+';
                 }
         });
-        window.add(btnAdd);
+        window.add(btnAdd);*/
+        optBtn addB=new addBtn("+",x[3], y[4],wBtn, hBtn,btnFont,new Cursor(Cursor.HAND_CURSOR), inText,window);
+        //window.add();
         
         btnPoint = new JButton(".");
         btnPoint.setBounds(x[0],y[5],wBtn,hBtn);

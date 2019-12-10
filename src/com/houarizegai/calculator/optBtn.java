@@ -10,6 +10,11 @@ import java.awt.Component;
 import javax.swing.*;
 
 public abstract class optBtn{
-	private JButton btn;
+	protected JButton btn;
+	protected double val;
 	public abstract double cal(double x, String input);
+	/*private void repaintFont() {
+        inText.setFont(inText.getFont().deriveFont(Font.PLAIN));
+    }*/
 }
+ 
