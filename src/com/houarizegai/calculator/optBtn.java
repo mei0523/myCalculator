@@ -11,8 +11,8 @@ import javax.swing.*;
 
 public abstract class optBtn{
 	protected JButton btn;
-	protected double val;
-	public abstract double cal(double x, String input);
+	//protected double val;
+	protected abstract double cal(double x, String input);
 	/*private void repaintFont() {
         inText.setFont(inText.getFont().deriveFont(Font.PLAIN));
     }*/

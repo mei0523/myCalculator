@@ -18,10 +18,10 @@ public class Calculator {
     private JTextField inText, affichageCalc; // Input Text
     private JButton btnC, btnBack, btnMod, btnDiv, btnMul, btnSub, btnAdd, btnPoint, btnEqual, choixColor;
     private List<JButton> numBtn;
-    private char opt = ' ';             // Storage Oparator
-    private boolean go = true,          // Faire Calcule Avec Opt != (=)
-            addWrite = true;    // Racordé des Nombres dans l'Affichage
-    private double val = 0; // Storage Values For Calcule
+    private char opt[] = {' '};             // Storage Oparator
+    private boolean go[] = {true},          // Faire Calcule Avec opt[0] != (=)
+            addWrite[] = {true};    // Racordé des Nombres dans l'Affichage
+    private double val[] = {0}; // Storage val[0]ues For Calcule
     private boolean bool = false;
     //private int num=1;
     /*
@@ -100,8 +100,8 @@ public class Calculator {
         btnC.addActionListener(event -> {
             repaintFont();
             inText.setText("0");
-            opt = ' ';
-            val = 0;
+            opt[0] = ' ';
+            val[0] = 0;
         });
         window.add(btnC);
                 
@@ -131,16 +131,16 @@ public class Calculator {
         btnMod.addActionListener(event -> {
             repaintFont();
             if (Pattern.matches("([-]?\\d+[.]\\d*)|(\\d+)", inText.getText()))
-                if (go) {
-                    val = calc(val, inText.getText(), opt);
-                    if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(val))) {
-                        inText.setText(String.valueOf((int) val));
+                if (go[0]) {
+                    val[0] = calc(val[0], inText.getText(), opt);
+                    if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(val[0]))) {
+                        inText.setText(String.valueOf((int) val[0]));
                     } else {
-                        inText.setText(String.valueOf(val));
+                        inText.setText(String.valueOf(val[0]));
                     }
-                    opt = '%';
-                    go = false;
-                    addWrite = false;
+                    opt[0] = '%';
+                    go[0] = false;
+                    addWrite[0] = false;
                 }
         });
         window.add(btnMod);
@@ -152,18 +152,18 @@ public class Calculator {
         btnDiv.addActionListener(event -> {
             repaintFont();
             if (Pattern.matches("([-]?\\d+[.]\\d*)|(\\d+)", inText.getText()))
-                if (go) {
-                    val = calc(val, inText.getText(), opt);
-                    if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(val))) {
-                        inText.setText(String.valueOf((int) val));
+                if (go[0]) {
+                    val[0] = calc(val[0], inText.getText(), opt);
+                    if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(val[0]))) {
+                        inText.setText(String.valueOf((int) val[0]));
                     } else {
-                        inText.setText(String.valueOf(val));
+                        inText.setText(String.valueOf(val[0]));
                     }
-                    opt = '/';
-                    go = false;
-                    addWrite = false;
+                    opt[0] = '/';
+                    go[0] = false;
+                    addWrite[0] = false;
                 } else {
-                    opt = '/';
+                    opt[0] = '/';
                 }
         });
         window.add(btnDiv);
@@ -176,18 +176,18 @@ public class Calculator {
         btnMul.addActionListener(event -> {
             repaintFont();
             if (Pattern.matches("([-]?\\d+[.]\\d*)|(\\d+)", inText.getText()))
-                if (go) {
-                    val = calc(val, inText.getText(), opt);
-                    if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(val))) {
-                        inText.setText(String.valueOf((int) val));
+                if (go[0]) {
+                    val[0] = calc(val[0], inText.getText(), opt);
+                    if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(val[0]))) {
+                        inText.setText(String.valueOf((int) val[0]));
                     } else {
-                        inText.setText(String.valueOf(val));
+                        inText.setText(String.valueOf(val[0]));
                     }
-                    opt = '*';
-                    go = false;
-                    addWrite = false;
+                    opt[0] = '*';
+                    go[0] = false;
+                    addWrite[0] = false;
                 } else {
-                    opt = '*';
+                    opt[0] = '*';
                 }
         });
         window.add(btnMul);
@@ -199,19 +199,19 @@ public class Calculator {
         btnSub.addActionListener(event -> {
             repaintFont();
             if (Pattern.matches("([-]?\\d+[.]\\d*)|(\\d+)", inText.getText()))
-                if (go) {
-                    val = calc(val, inText.getText(), opt);
-                    if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(val))) {
-                        inText.setText(String.valueOf((int) val));
+                if (go[0]) {
+                    val[0] = calc(val[0], inText.getText(), opt);
+                    if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(val[0]))) {
+                        inText.setText(String.valueOf((int) val[0]));
                     } else {
-                        inText.setText(String.valueOf(val));
+                        inText.setText(String.valueOf(val[0]));
                     }
 
-                    opt = '-';
-                    go = false;
-                    addWrite = false;
+                    opt[0] = '-';
+                    go[0] = false;
+                    addWrite[0] = false;
                 } else {
-                    opt = '-';
+                    opt[0] = '-';
                 }
         });
         window.add(btnSub);
@@ -223,22 +223,22 @@ public class Calculator {
         btnAdd.addActionListener(event -> {
             repaintFont();
             if (Pattern.matches("([-]?\\d+[.]\\d*)|(\\d+)", inText.getText()))
-                if (go) {
-                    val = calc(val, inText.getText(), opt);
-                    if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(val))) {
-                        inText.setText(String.valueOf((int) val));
+                if (go[0]) {
+                    val[0] = calc(val[0], inText.getText(), opt[0]);
+                    if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(val[0]))) {
+                        inText.setText(String.valueOf((int) val[0]));
                     } else {
-                        inText.setText(String.valueOf(val));
+                        inText.setText(String.valueOf(val[0]));
                     }
-                    opt = '+';
-                    go = false;
-                    addWrite = false;
+                    opt[0] = '+';
+                    go[0] = false;
+                    addWrite[0] = false;
                 } else {
-                    opt = '+';
+                    opt[0] = '+';
                 }
         });
         window.add(btnAdd);*/
-        optBtn addB=new addBtn("+",x[3], y[4],wBtn, hBtn,btnFont,new Cursor(Cursor.HAND_CURSOR), inText,window);
+        optBtn addB=new addBtn("+",x[3], y[4],wBtn, hBtn,btnFont,new Cursor(Cursor.HAND_CURSOR), inText,window,go,addWrite,val,opt);
         //window.add();
         
         btnPoint = new JButton(".");
@@ -247,13 +247,13 @@ public class Calculator {
         btnPoint.setCursor(new Cursor(Cursor.HAND_CURSOR));
         btnPoint.addActionListener(event -> {
             repaintFont();
-            if (addWrite) {
+            if (addWrite[0]) {
                 inText.setText(inText.getText() + ".");
             } else {
                 inText.setText("0.");
-                addWrite = true;
+                addWrite[0] = true;
             }
-            go = true;
+            go[0] = true;
         });
         window.add(btnPoint);
         
@@ -265,15 +265,15 @@ public class Calculator {
         btnEqual.setCursor(new Cursor(Cursor.HAND_CURSOR));
         btnEqual.addActionListener(event -> {
             if (Pattern.matches("([-]?\\d+[.]\\d*)|(\\d+)", inText.getText()))
-                if (go) {
-                    val = calc(val, inText.getText(), opt);
-                    if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(val))) {
-                        inText.setText(String.valueOf((int) val));
+                if (go[0]) {
+                    val[0] = calc(val[0], inText.getText(), opt);
+                    if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(val[0]))) {
+                        inText.setText(String.valueOf((int) val[0]));
                     } else {
-                        inText.setText(String.valueOf(val));
+                        inText.setText(String.valueOf(val[0]));
                     }
-                    opt = '=';
-                    addWrite = false;
+                    opt[0] = '=';
+                    addWrite[0] = false;
                 }
         });
         window.add(btnEqual);
@@ -289,7 +289,7 @@ public class Calculator {
         btn0.setCursor(new Cursor(Cursor.HAND_CURSOR));
         btn0.addActionListener(event -> {
             repaintFont();
-            if (addWrite) {
+            if (addWrite[0]) {
                 if (Pattern.matches("[0]*", inText.getText())) {
                     inText.setText("0");
                 } else {
@@ -297,9 +297,9 @@ public class Calculator {
                 }
             } else {
                 inText.setText("0");
-                addWrite = true;
+                addWrite[0] = true;
             }
-            go = true;
+            go[0] = true;
         });
         numBtn.add(btn0);
         window.add(btn0);
@@ -312,7 +312,7 @@ public class Calculator {
                 btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
                 btn.addActionListener(event -> {
                     repaintFont();
-                    if (addWrite) {
+                    if (addWrite[0]) {
                         if (Pattern.matches("[0]*", inText.getText())) {
                             inText.setText( btn.getText());
                         } else {
@@ -320,9 +320,9 @@ public class Calculator {
                         }
                     } else {
                         inText.setText( btn.getText());
-                        addWrite = true;
+                        addWrite[0] = true;
                     }
-                    go = true;
+                    go[0] = true;
                 });
                 numBtn.add(btn);
                 window.add(btn);
@@ -331,18 +331,18 @@ public class Calculator {
     	}
     }
 
-    private double calc(double x, String input, char opt) {
+    private double calc(double x, String input, char opt[]) {
         inText.setFont(inText.getFont().deriveFont(Font.BOLD));
         double y = Double.parseDouble(input);
-        if (opt == '+') {
+        if (opt[0] == '+') {
             return x + y;
-        } else if (opt == '-') {
+        } else if (opt[0] == '-') {
             return x - y;
-        } else if (opt == '*') {
+        } else if (opt[0] == '*') {
             return x * y;
-        } else if (opt == '/') {
+        } else if (opt[0] == '/') {
             return x / y;
-        } else if (opt == '%') {
+        } else if (opt[0] == '%') {
             return x % y;
         }
         inText.setFont(inText.getFont().deriveFont(Font.PLAIN));
