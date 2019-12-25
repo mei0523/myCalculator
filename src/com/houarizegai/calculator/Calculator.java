@@ -18,10 +18,11 @@ public class Calculator {
     private JTextField inText, affichageCalc; // Input Text
     private JButton btnC, btnBack, btnMod, btnDiv, btnMul, btnSub, btnAdd, btnPoint, btnEqual, choixColor;
     private List<JButton> numBtn;
-    private char opt[] = {' '};             // Storage Oparator
-    private boolean go[] = {true},          // Faire Calcule Avec opt[0] != (=)
-            addWrite[] = {true};    // Racordé des Nombres dans l'Affichage
-    private double val[] = {0}; // Storage val[0]ues For Calcule
+    private List<optBtn> operateBtn;
+    private char opt[] = {' '};            
+    private boolean go[] = {true},         
+            addWrite[] = {true};    
+    private double val[] = {0};
     private boolean bool = false;
     //private int num=1;
     /*
@@ -62,6 +63,7 @@ public class Calculator {
 
     private Calculator() {
     	numBtn= new ArrayList<>();
+    	operateBtn=new ArrayList<>();
     	
         window = new JFrame("Calculator");
         window.setSize(410,600); // Height And Width Of Window
@@ -145,101 +147,16 @@ public class Calculator {
         });
         window.add(btnMod);
         
-        btnDiv = new JButton("/");
-        btnDiv.setBounds(x[3],y[1],wBtn,hBtn);
-        btnDiv.setFont(btnFont);
-        btnDiv.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        btnDiv.addActionListener(event -> {
-            repaintFont();
-            if (Pattern.matches("([-]?\\d+[.]\\d*)|(\\d+)", inText.getText()))
-                if (go[0]) {
-                    val[0] = calc(val[0], inText.getText(), opt);
-                    if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(val[0]))) {
-                        inText.setText(String.valueOf((int) val[0]));
-                    } else {
-                        inText.setText(String.valueOf(val[0]));
-                    }
-                    opt[0] = '/';
-                    go[0] = false;
-                    addWrite[0] = false;
-                } else {
-                    opt[0] = '/';
-                }
-        });
-        window.add(btnDiv);
-        
-        
-        btnMul = new JButton("*");
-        btnMul.setBounds(x[3],y[2],wBtn,hBtn);
-        btnMul.setFont(btnFont);
-        btnMul.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        btnMul.addActionListener(event -> {
-            repaintFont();
-            if (Pattern.matches("([-]?\\d+[.]\\d*)|(\\d+)", inText.getText()))
-                if (go[0]) {
-                    val[0] = calc(val[0], inText.getText(), opt);
-                    if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(val[0]))) {
-                        inText.setText(String.valueOf((int) val[0]));
-                    } else {
-                        inText.setText(String.valueOf(val[0]));
-                    }
-                    opt[0] = '*';
-                    go[0] = false;
-                    addWrite[0] = false;
-                } else {
-                    opt[0] = '*';
-                }
-        });
-        window.add(btnMul);
-        
-        btnSub = new JButton("-");
-        btnSub.setBounds(x[3],y[3],wBtn,hBtn);
-        btnSub.setFont(btnFont);
-        btnSub.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        btnSub.addActionListener(event -> {
-            repaintFont();
-            if (Pattern.matches("([-]?\\d+[.]\\d*)|(\\d+)", inText.getText()))
-                if (go[0]) {
-                    val[0] = calc(val[0], inText.getText(), opt);
-                    if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(val[0]))) {
-                        inText.setText(String.valueOf((int) val[0]));
-                    } else {
-                        inText.setText(String.valueOf(val[0]));
-                    }
 
-                    opt[0] = '-';
-                    go[0] = false;
-                    addWrite[0] = false;
-                } else {
-                    opt[0] = '-';
-                }
-        });
-        window.add(btnSub);
-        
-       /* btnAdd = new JButton("+");
-        btnAdd.setBounds(x[3], y[4], wBtn, hBtn);
-        btnAdd.setFont(btnFont);
-        btnAdd.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        btnAdd.addActionListener(event -> {
-            repaintFont();
-            if (Pattern.matches("([-]?\\d+[.]\\d*)|(\\d+)", inText.getText()))
-                if (go[0]) {
-                    val[0] = calc(val[0], inText.getText(), opt[0]);
-                    if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(val[0]))) {
-                        inText.setText(String.valueOf((int) val[0]));
-                    } else {
-                        inText.setText(String.valueOf(val[0]));
-                    }
-                    opt[0] = '+';
-                    go[0] = false;
-                    addWrite[0] = false;
-                } else {
-                    opt[0] = '+';
-                }
-        });
-        window.add(btnAdd);*/
         optBtn addB=new addBtn("+",x[3], y[4],wBtn, hBtn,btnFont,new Cursor(Cursor.HAND_CURSOR), inText,window,go,addWrite,val,opt);
-        //window.add();
+        operateBtn.add(addB);
+        optBtn subB=new subBtn("-",x[3], y[3],wBtn, hBtn,btnFont,new Cursor(Cursor.HAND_CURSOR), inText,window,go,addWrite,val,opt);
+        operateBtn.add(subB);
+        optBtn mulB=new mulBtn("*",x[3], y[2],wBtn, hBtn,btnFont,new Cursor(Cursor.HAND_CURSOR), inText,window,go,addWrite,val,opt);
+        operateBtn.add(mulB);
+        optBtn divB=new divBtn("/",x[3], y[1],wBtn, hBtn,btnFont,new Cursor(Cursor.HAND_CURSOR), inText,window,go,addWrite,val,opt);
+        operateBtn.add(divB);
+        
         
         btnPoint = new JButton(".");
         btnPoint.setBounds(x[0],y[5],wBtn,hBtn);
@@ -258,25 +175,8 @@ public class Calculator {
         window.add(btnPoint);
         
 
-        
-        btnEqual = new JButton("=");
-        btnEqual.setBounds(x[2],y[5],2*wBtn+10,hBtn);
-        btnEqual.setFont(btnFont);
-        btnEqual.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        btnEqual.addActionListener(event -> {
-            if (Pattern.matches("([-]?\\d+[.]\\d*)|(\\d+)", inText.getText()))
-                if (go[0]) {
-                    val[0] = calc(val[0], inText.getText(), opt);
-                    if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(val[0]))) {
-                        inText.setText(String.valueOf((int) val[0]));
-                    } else {
-                        inText.setText(String.valueOf(val[0]));
-                    }
-                    opt[0] = '=';
-                    addWrite[0] = false;
-                }
-        });
-        window.add(btnEqual);
+        equalBtn equalB=new equalBtn("=",x[2],y[5],2*wBtn+10, hBtn,btnFont,new Cursor(Cursor.HAND_CURSOR), inText,window,go,addWrite,val,opt,operateBtn);
+       
         window.setLayout(null);
         window.setResizable(false);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // If Click into The Red Button => End The Processus
@@ -335,10 +235,13 @@ public class Calculator {
         inText.setFont(inText.getFont().deriveFont(Font.BOLD));
         double y = Double.parseDouble(input);
         if (opt[0] == '+') {
+        	System.out.print("x:"+x+" y:"+y);
             return x + y;
         } else if (opt[0] == '-') {
+        	System.out.print("x:"+x+" y:"+y);
             return x - y;
         } else if (opt[0] == '*') {
+        	System.out.print("x:"+x+" y:"+y);
             return x * y;
         } else if (opt[0] == '/') {
             return x / y;

@@ -11,8 +11,12 @@ import javax.swing.*;
 
 public abstract class optBtn{
 	protected JButton btn;
+	protected boolean chosen=false;
 	//protected double val;
 	protected abstract double cal(double x, String input);
+	public boolean checkChosen() {
+		return chosen;
+	}
 	/*private void repaintFont() {
         inText.setFont(inText.getFont().deriveFont(Font.PLAIN));
     }*/

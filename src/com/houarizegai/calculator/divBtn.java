@@ -8,8 +8,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 
-public class addBtn extends optBtn {
-	public addBtn(String symbol,int x,int y,int wBtn,int hBtn,Font btnFont,Cursor c, JTextField inText,JFrame window,boolean go[],boolean addWrite[],double val[],char opt[]) {
+public class divBtn extends optBtn {
+	public divBtn(String symbol,int x,int y,int wBtn,int hBtn,Font btnFont,Cursor c, JTextField inText,JFrame window,boolean go[],boolean addWrite[],double val[],char opt[]) {
 		btn=new JButton(symbol);
 		btn.setBounds(x, y, wBtn, hBtn);
 	    btn.setFont(btnFont);
@@ -18,7 +18,7 @@ public class addBtn extends optBtn {
 	    	inText.setFont(inText.getFont().deriveFont(Font.PLAIN));
 	        if (Pattern.matches("([-]?\\d+[.]\\d*)|(\\d+)", inText.getText()))
 	            if (go[0]) {
-	            	System.out.println("Enter sub go in");
+	            	
 	            	val[0]=Double.parseDouble(inText.getText());
 	                inText.setFont(inText.getFont().deriveFont(Font.PLAIN));
 	                
@@ -42,7 +42,7 @@ public class addBtn extends optBtn {
 		// TODO Auto-generated method stub
 		double y = Double.parseDouble(input);
 		chosen=false;
-		return x+y;
+		return x/y;
 	}
 
 }

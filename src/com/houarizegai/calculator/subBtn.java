@@ -8,8 +8,9 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 
-public class addBtn extends optBtn {
-	public addBtn(String symbol,int x,int y,int wBtn,int hBtn,Font btnFont,Cursor c, JTextField inText,JFrame window,boolean go[],boolean addWrite[],double val[],char opt[]) {
+public class subBtn extends optBtn {
+	public subBtn(String symbol,int x,int y,int wBtn,int hBtn,Font btnFont,Cursor c, JTextField inText,JFrame window,boolean go[],boolean addWrite[],double val[],char opt[]) {
+		//System.out.println(symbol.charAt(0));
 		btn=new JButton(symbol);
 		btn.setBounds(x, y, wBtn, hBtn);
 	    btn.setFont(btnFont);
@@ -18,7 +19,7 @@ public class addBtn extends optBtn {
 	    	inText.setFont(inText.getFont().deriveFont(Font.PLAIN));
 	        if (Pattern.matches("([-]?\\d+[.]\\d*)|(\\d+)", inText.getText()))
 	            if (go[0]) {
-	            	System.out.println("Enter sub go in");
+	            	
 	            	val[0]=Double.parseDouble(inText.getText());
 	                inText.setFont(inText.getFont().deriveFont(Font.PLAIN));
 	                
@@ -27,11 +28,12 @@ public class addBtn extends optBtn {
 	                } else {
 	                    inText.setText(String.valueOf(val[0]));
 	                }
+	                opt[0] = symbol.charAt(0);
 	                go[0] = false;
 	                addWrite[0] = false;
-	                opt[0] = symbol.charAt(0);
+	            }else {
+	            	opt[0] = symbol.charAt(0);
 	            }
-	        opt[0] = symbol.charAt(0);
 	        chosen=true;
 	    });
 	    window.add(btn);
@@ -42,7 +44,7 @@ public class addBtn extends optBtn {
 		// TODO Auto-generated method stub
 		double y = Double.parseDouble(input);
 		chosen=false;
-		return x+y;
+		return x-y;
 	}
 
 }
