@@ -15,7 +15,7 @@ import java.util.*;
 public class Calculator {
 
     private JFrame window; // This is Main Window
-    private JTextField inText, affichageCalc; // Input Text
+    private JTextField inText; // Input Text
     private JButton btnC, btnBack, btnMod, btnDiv, btnMul, btnSub, btnAdd, btnPoint, btnEqual, choixColor;
     private List<JButton> numBtn;
     private List<optBtn> operateBtn;
@@ -164,27 +164,18 @@ public class Calculator {
         window.setVisible(true);
         
         //¼Æ¦r«ö¶sªì©l¤Æ
-        JButton btn0 = new JButton("0");
-        btn0.setBounds(x[1],y[5],wBtn,hBtn);
-        btn0.setFont(btnFont);
-        btn0.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        btn0.addActionListener(event -> {
-            repaintFont();
-            if (addWrite[0]) {
-                if (Pattern.matches("[0]*", inText.getText())) {
-                    inText.setText("0");
-                } else {
-                    inText.setText(inText.getText() + "0");
-                }
-            } else {
-                inText.setText("0");
-                addWrite[0] = true;
-            }
-            go[0] = true;
-        });
-        numBtn.add(btn0);
-        window.add(btn0);
-        int num=1;
+        numBtn btn0=new numBtn("0",x[1],y[5],wBtn,hBtn,btnFont,inText,window,go,addWrite);
+        numBtn btn1=new numBtn("1",x[0],y[4],wBtn,hBtn,btnFont,inText,window,go,addWrite);
+        numBtn btn2=new numBtn("2",x[1],y[4],wBtn,hBtn,btnFont,inText,window,go,addWrite);
+        numBtn btn3=new numBtn("3",x[2],y[4],wBtn,hBtn,btnFont,inText,window,go,addWrite);
+        numBtn btn4=new numBtn("4",x[0],y[3],wBtn,hBtn,btnFont,inText,window,go,addWrite);
+        numBtn btn5=new numBtn("5",x[1],y[3],wBtn,hBtn,btnFont,inText,window,go,addWrite);
+        numBtn btn6=new numBtn("6",x[2],y[3],wBtn,hBtn,btnFont,inText,window,go,addWrite);
+        numBtn btn7=new numBtn("7",x[0],y[2],wBtn,hBtn,btnFont,inText,window,go,addWrite);
+        numBtn btn8=new numBtn("8",x[1],y[2],wBtn,hBtn,btnFont,inText,window,go,addWrite);
+        numBtn btn9=new numBtn("9",x[2],y[2],wBtn,hBtn,btnFont,inText,window,go,addWrite);
+        
+        /*int num=1;
     	for(int i=4;i>1;--i) {
     		for(int j=0;j<3;++j) {
     			JButton btn = new JButton(Integer.toString(num));
@@ -209,7 +200,7 @@ public class Calculator {
                 window.add(btn);
     			num=num+1;
     		}
-    	}
+    	}*/
     }
 
 

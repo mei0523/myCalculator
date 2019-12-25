@@ -9,7 +9,8 @@ import javax.swing.JFrame;
 import javax.swing.JTextField;
 
 public class addBtn extends optBtn {
-	public addBtn(String symbol,int x,int y,int wBtn,int hBtn,Font btnFont,Cursor c, JTextField inText,JFrame window,boolean go[],boolean addWrite[],double val[],char opt[]) {
+	public addBtn(String symbol,int x,int y,int wBtn,int hBtn,Font btnFont,Cursor c, 
+			JTextField inText,JFrame window,boolean go[],boolean addWrite[],double val[],char opt[]) {
 		btn=new JButton(symbol);
 		btn.setBounds(x, y, wBtn, hBtn);
 	    btn.setFont(btnFont);
