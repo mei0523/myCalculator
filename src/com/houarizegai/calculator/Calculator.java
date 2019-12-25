@@ -126,28 +126,7 @@ public class Calculator {
         });
         window.add(btnBack);
         
-        btnMod = new JButton("%");
-        btnMod.setBounds(x[2],y[1],wBtn,hBtn);
-        btnMod.setFont(btnFont);
-        btnMod.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        btnMod.addActionListener(event -> {
-            repaintFont();
-            if (Pattern.matches("([-]?\\d+[.]\\d*)|(\\d+)", inText.getText()))
-                if (go[0]) {
-                    val[0] = calc(val[0], inText.getText(), opt);
-                    if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(val[0]))) {
-                        inText.setText(String.valueOf((int) val[0]));
-                    } else {
-                        inText.setText(String.valueOf(val[0]));
-                    }
-                    opt[0] = '%';
-                    go[0] = false;
-                    addWrite[0] = false;
-                }
-        });
-        window.add(btnMod);
-        
-
+      
         optBtn addB=new addBtn("+",x[3], y[4],wBtn, hBtn,btnFont,new Cursor(Cursor.HAND_CURSOR), inText,window,go,addWrite,val,opt);
         operateBtn.add(addB);
         optBtn subB=new subBtn("-",x[3], y[3],wBtn, hBtn,btnFont,new Cursor(Cursor.HAND_CURSOR), inText,window,go,addWrite,val,opt);
@@ -156,6 +135,8 @@ public class Calculator {
         operateBtn.add(mulB);
         optBtn divB=new divBtn("/",x[3], y[1],wBtn, hBtn,btnFont,new Cursor(Cursor.HAND_CURSOR), inText,window,go,addWrite,val,opt);
         operateBtn.add(divB);
+        optBtn modB=new modBtn("%",x[2], y[1],wBtn, hBtn,btnFont,new Cursor(Cursor.HAND_CURSOR), inText,window,go,addWrite,val,opt);
+        operateBtn.add(modB);
         
         
         btnPoint = new JButton(".");
@@ -231,26 +212,6 @@ public class Calculator {
     	}
     }
 
-    private double calc(double x, String input, char opt[]) {
-        inText.setFont(inText.getFont().deriveFont(Font.BOLD));
-        double y = Double.parseDouble(input);
-        if (opt[0] == '+') {
-        	System.out.print("x:"+x+" y:"+y);
-            return x + y;
-        } else if (opt[0] == '-') {
-        	System.out.print("x:"+x+" y:"+y);
-            return x - y;
-        } else if (opt[0] == '*') {
-        	System.out.print("x:"+x+" y:"+y);
-            return x * y;
-        } else if (opt[0] == '/') {
-            return x / y;
-        } else if (opt[0] == '%') {
-            return x % y;
-        }
-        inText.setFont(inText.getFont().deriveFont(Font.PLAIN));
-        return y;
-    }
 
     private void repaintFont() {
         inText.setFont(inText.getFont().deriveFont(Font.PLAIN));
