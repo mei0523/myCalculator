@@ -12,7 +12,7 @@ public class Calculator {
 
     private JFrame window; // This is Main Window
     private JTextField inText; // Input Text
-    private JButton btnC, btnBack, btnPoint, btnEqual, choixColor;
+    private JButton choixColor;
     private List<optBtn> operateBtn;
     private List<numBtn> numberBtn;
     private List<otherBtn> otherElseBtn;
@@ -57,7 +57,6 @@ public class Calculator {
          x[0] x[1] x[2] x[3]
     
     */
-
     private Calculator() {
     	operateBtn=new ArrayList<>();
     	numberBtn=new ArrayList<>();
@@ -112,7 +111,6 @@ public class Calculator {
         operateBtn.add(divB);
         optBtn modB=new modBtn("%",x[2], y[1],wBtn, hBtn,btnFont,new Cursor(Cursor.HAND_CURSOR), inText,window,go,addWrite,val,opt);
         operateBtn.add(modB);
-        
         
         window.setLayout(null);
         window.setResizable(false);
