@@ -7,9 +7,9 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 
-public class pointBtn {
-	private JButton btn;
-	public pointBtn(String symbol,int x,int y,int wBtn,int hBtn,Font btnFont, JTextField inText,JFrame window,boolean go[],boolean addWrite[]) {
+public class pointBtn extends otherBtn{
+	public pointBtn(String symbol,int x,int y,int wBtn,int hBtn,Font btnFont, 
+			JTextField inText,JFrame window,boolean go[],boolean addWrite[]) {
 		btn=new JButton(symbol);
 		 btn.setBounds(x,y,wBtn,hBtn);
 	        btn.setFont(new Font("Comic Sans MS", Font.BOLD, 32));

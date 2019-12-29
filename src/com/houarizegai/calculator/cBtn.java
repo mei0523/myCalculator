@@ -6,8 +6,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 
-public class cBtn {
-	private JButton btn;
+public class cBtn extends otherBtn{
 	public cBtn(String symbol,int x,int y,int wBtn,int hBtn,Font btnFont, JTextField inText,JFrame window,boolean go[],boolean addWrite[],double val[],char opt[]) {
 		btn=new JButton(symbol);
 		btn.setBounds(x,y,wBtn,hBtn);

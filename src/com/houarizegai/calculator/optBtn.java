@@ -1,12 +1,6 @@
 package com.houarizegai.calculator;
 
-import java.awt.Cursor;
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.regex.Pattern;
 import java.awt.Color;
-import java.awt.Component;
 import javax.swing.*;
 
 public abstract class optBtn{
@@ -15,6 +9,10 @@ public abstract class optBtn{
 	protected abstract double cal(double x, String input);
 	public boolean checkChosen() {
 		return chosen;
+	}
+	public void setBackForeground(Color b,Color f) {
+		btn.setBackground(b);
+		btn.setForeground(f);
 	}
 }
  

@@ -3,6 +3,7 @@ package com.houarizegai.calculator;
 import java.awt.Cursor;
 import java.awt.Font;
 import java.util.regex.Pattern;
+import java.awt.Color;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -32,5 +33,7 @@ public class numBtn {
         });
         window.add(btn);
 	}
-
+	public void setBtnBackground(Color c) {
+		btn.setBackground(c);
+	}
 }

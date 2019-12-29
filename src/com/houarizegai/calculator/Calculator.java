@@ -3,11 +3,7 @@ package com.houarizegai.calculator;
 
 import java.awt.Cursor;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.regex.Pattern;
 import java.awt.Color;
-import java.awt.Component;
 
 import javax.swing.*;
 import java.util.*;
@@ -16,8 +12,10 @@ public class Calculator {
 
     private JFrame window; // This is Main Window
     private JTextField inText; // Input Text
-    private JButton btnC, btnBack, btnMod, btnDiv, btnMul, btnSub, btnAdd, btnPoint, btnEqual, choixColor;
+    private JButton btnC, btnBack, btnPoint, btnEqual, choixColor;
     private List<optBtn> operateBtn;
+    private List<numBtn> numberBtn;
+    private List<otherBtn> otherElseBtn;
     private char opt[] = {' '};            
     private boolean go[] = {true},         
             addWrite[] = {true};    
@@ -62,6 +60,8 @@ public class Calculator {
 
     private Calculator() {
     	operateBtn=new ArrayList<>();
+    	numberBtn=new ArrayList<>();
+    	otherElseBtn=new ArrayList<>();
     	
         window = new JFrame("Calculator");
         window.setSize(410,600); // Height And Width Of Window
@@ -93,12 +93,15 @@ public class Calculator {
         inText.setFont(new Font("Comic Sans MS", Font.PLAIN, 33));
         window.add(inText);
         
-        cBtn cB=new cBtn("C",x[0],y[1],wBtn,hBtn,btnFont,inText,window,go,addWrite,val,opt);
+        otherBtn cB=new cBtn("C",x[0],y[1],wBtn,hBtn,btnFont,inText,window,go,addWrite,val,opt);
+        otherElseBtn.add(cB);
+        otherBtn backB=new backBtn("<-",x[1],y[1],wBtn,hBtn,btnFont,inText,window);
+        otherElseBtn.add(backB);
+        otherBtn equalB=new equalBtn("=",x[2],y[5],2*wBtn+10, hBtn,btnFont,new Cursor(Cursor.HAND_CURSOR), inText,window,go,addWrite,val,opt,operateBtn);
+        otherElseBtn.add(equalB);
+        otherBtn pointB=new pointBtn(".",x[0],y[5],wBtn,hBtn,btnFont,inText,window, go,addWrite);
+        otherElseBtn.add(pointB);
         
-        backBtn backB=new backBtn("<-",x[1],y[1],wBtn,hBtn,btnFont,inText,window);
-        
-        equalBtn equalB=new equalBtn("=",x[2],y[5],2*wBtn+10, hBtn,btnFont,new Cursor(Cursor.HAND_CURSOR), inText,window,go,addWrite,val,opt,operateBtn);
-      
         optBtn addB=new addBtn("+",x[3], y[4],wBtn, hBtn,btnFont,new Cursor(Cursor.HAND_CURSOR), inText,window,go,addWrite,val,opt);
         operateBtn.add(addB);
         optBtn subB=new subBtn("-",x[3], y[3],wBtn, hBtn,btnFont,new Cursor(Cursor.HAND_CURSOR), inText,window,go,addWrite,val,opt);
@@ -110,7 +113,6 @@ public class Calculator {
         optBtn modB=new modBtn("%",x[2], y[1],wBtn, hBtn,btnFont,new Cursor(Cursor.HAND_CURSOR), inText,window,go,addWrite,val,opt);
         operateBtn.add(modB);
         
-        pointBtn pointB=new pointBtn(".",x[0],y[5],wBtn,hBtn,btnFont,inText,window, go,addWrite);
         
         window.setLayout(null);
         window.setResizable(false);
@@ -119,16 +121,25 @@ public class Calculator {
         
         //¼Æ¦r«ö¶sªì©l¤Æ
         numBtn btn0=new numBtn("0",x[1],y[5],wBtn,hBtn,btnFont,inText,window,go,addWrite);
+        numberBtn.add(btn0);
         numBtn btn1=new numBtn("1",x[0],y[4],wBtn,hBtn,btnFont,inText,window,go,addWrite);
+        numberBtn.add(btn1);
         numBtn btn2=new numBtn("2",x[1],y[4],wBtn,hBtn,btnFont,inText,window,go,addWrite);
+        numberBtn.add(btn2);
         numBtn btn3=new numBtn("3",x[2],y[4],wBtn,hBtn,btnFont,inText,window,go,addWrite);
+        numberBtn.add(btn3);
         numBtn btn4=new numBtn("4",x[0],y[3],wBtn,hBtn,btnFont,inText,window,go,addWrite);
+        numberBtn.add(btn4);
         numBtn btn5=new numBtn("5",x[1],y[3],wBtn,hBtn,btnFont,inText,window,go,addWrite);
+        numberBtn.add(btn5);
         numBtn btn6=new numBtn("6",x[2],y[3],wBtn,hBtn,btnFont,inText,window,go,addWrite);
+        numberBtn.add(btn6);
         numBtn btn7=new numBtn("7",x[0],y[2],wBtn,hBtn,btnFont,inText,window,go,addWrite);
+        numberBtn.add(btn7);
         numBtn btn8=new numBtn("8",x[1],y[2],wBtn,hBtn,btnFont,inText,window,go,addWrite);
+        numberBtn.add(btn8);
         numBtn btn9=new numBtn("9",x[2],y[2],wBtn,hBtn,btnFont,inText,window,go,addWrite);
-       
+        numberBtn.add(btn9);
     }
 
     private void themeColor() {
@@ -137,69 +148,18 @@ public class Calculator {
             choixColor.setText("Toggle colors");
             choixColor.setBackground(Color.GREEN.darker());
             choixColor.setForeground(Color.WHITE);
-            btnC.setBackground(null);
-            btnBack.setBackground(null);
-            btnMod.setBackground(null);
-            btnDiv.setBackground(null);
-            btnMul.setBackground(null);
-            btnSub.setBackground(null);
-            btnAdd.setBackground(null);
-            btnEqual.setBackground(null);
-            /*btn0.setBackground(null);
-            btn1.setBackground(null);
-            btn2.setBackground(null);
-            btn3.setBackground(null);
-            btn4.setBackground(null);
-            btn5.setBackground(null);
-            btn6.setBackground(null);
-            btn7.setBackground(null);
-            btn8.setBackground(null);
-            btn9.setBackground(null);*/
-            btnPoint.setBackground(null);
-
-            btnC.setForeground(Color.BLACK);
-            btnBack.setForeground(Color.BLACK);
-            btnMod.setForeground(Color.BLACK);
-            btnDiv.setForeground(Color.BLACK);
-            btnMul.setForeground(Color.BLACK);
-            btnSub.setForeground(Color.BLACK);
-            btnAdd.setForeground(Color.BLACK);
-            btnEqual.setForeground(Color.BLACK);
+            for(int i=0;i<otherElseBtn.size();++i)otherElseBtn.get(i).setBackForeground(null, Color.black);
+            for(int i=0;i<operateBtn.size();++i)operateBtn.get(i).setBackForeground(null, Color.black);
+            for(int i=0;i<numberBtn.size();++i)numberBtn.get(i).setBtnBackground(null);
 
             bool = false;
         } else {
             choixColor.setText("Untoggle colors");
             choixColor.setBackground(null);
             choixColor.setForeground(Color.BLACK);
-            btnC.setBackground(Color.RED);
-            btnBack.setBackground(Color.ORANGE);
-            btnMod.setBackground(Color.GREEN);
-            btnDiv.setBackground(Color.PINK);
-            btnMul.setBackground(Color.PINK);
-            btnSub.setBackground(Color.PINK);
-            btnAdd.setBackground(Color.PINK);
-            btnEqual.setBackground(Color.BLUE);
-            /*btn0.setBackground(Color.WHITE);
-            btn1.setBackground(Color.WHITE);
-            btn2.setBackground(Color.WHITE);
-            btn3.setBackground(Color.WHITE);
-            btn4.setBackground(Color.WHITE);
-            btn5.setBackground(Color.WHITE);
-            btn6.setBackground(Color.WHITE);
-            btn7.setBackground(Color.WHITE);
-            btn8.setBackground(Color.WHITE);
-            btn9.setBackground(Color.WHITE);*/
-            btnPoint.setBackground(Color.WHITE);
-
-            btnC.setForeground(Color.WHITE);
-            btnBack.setForeground(Color.WHITE);
-
-            btnMod.setForeground(Color.WHITE);
-            btnDiv.setForeground(Color.WHITE);
-            btnMul.setForeground(Color.WHITE);
-            btnSub.setForeground(Color.WHITE);
-            btnAdd.setForeground(Color.WHITE);
-            btnEqual.setForeground(Color.WHITE);
+            for(int i=0;i<otherElseBtn.size();++i)otherElseBtn.get(i).setBackForeground(Color.ORANGE, Color.WHITE);
+            for(int i=0;i<numberBtn.size();++i)numberBtn.get(i).setBtnBackground(Color.WHITE);
+            for(int i=0;i<operateBtn.size();++i)operateBtn.get(i).setBackForeground(Color.pink, Color.white);
             bool = true;
         }
         

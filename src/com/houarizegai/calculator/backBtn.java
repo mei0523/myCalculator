@@ -6,8 +6,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 
-public class backBtn {
-	private JButton btn;
+public class backBtn extends otherBtn{
 	public backBtn(String symbol,int x,int y,int wBtn,int hBtn,Font btnFont, JTextField inText,JFrame window) {
 		btn=new JButton(symbol);
 		btn.setBounds(x,y,wBtn,hBtn);
