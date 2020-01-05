@@ -10,31 +10,7 @@ import javax.swing.JTextField;
 
 public class divBtn extends optBtn {
 	public divBtn(String symbol,int x,int y,int wBtn,int hBtn,Font btnFont,Cursor c, JTextField inText,JFrame window,boolean go[],boolean addWrite[],double val[],char opt[]) {
-		btn=new JButton(symbol);
-		btn.setBounds(x, y, wBtn, hBtn);
-	    btn.setFont(btnFont);
-	    btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-	    btn.addActionListener(event -> {
-	    	inText.setFont(inText.getFont().deriveFont(Font.PLAIN));
-	        if (Pattern.matches("([-]?\\d+[.]\\d*)|(\\d+)", inText.getText()))
-	            if (go[0]) {
-	            	
-	            	val[0]=Double.parseDouble(inText.getText());
-	                inText.setFont(inText.getFont().deriveFont(Font.PLAIN));
-	                
-	                if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(val[0]))) {
-	                    inText.setText(String.valueOf((int) val[0]));
-	                } else {
-	                    inText.setText(String.valueOf(val[0]));
-	                }
-	                go[0] = false;
-	                addWrite[0] = false;
-	                opt[0] = symbol.charAt(0);
-	            }
-	        opt[0] = symbol.charAt(0);
-	        chosen=true;
-	    });
-	    window.add(btn);
+		super(symbol,x,y,wBtn,hBtn,btnFont,c,inText,window,go,addWrite,val,opt);
 	}
 	
 	@Override

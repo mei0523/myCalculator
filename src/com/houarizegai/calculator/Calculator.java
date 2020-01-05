@@ -21,6 +21,13 @@ public class Calculator {
             addWrite[] = {true};    
     private double val[] = {0};
     private boolean bool = false;
+    private int wBtn = 80;// Width Button
+    private int hBtn = 70;
+    private int marginX = 20;
+    private int marginY = 60;
+    private int[] x = {marginX, marginX + 90, 200, 290};
+    private int[] y = {marginY, marginY + 100, marginY + 180, marginY + 260, marginY + 340, marginY + 420};
+    private Font btnFont = new Font("Comic Sans MS", Font.PLAIN, 28);
     //private int num=1;
     /*
         Mx Calculator: 
@@ -63,81 +70,34 @@ public class Calculator {
     	otherElseBtn=new ArrayList<>();
     	
         window = new JFrame("Calculator");
-        window.setSize(410,600); // Height And Width Of Window
+        window.setSize(500,600); // Height And Width Of Window
         window.setLocationRelativeTo(null); // Move Window To Center
         
-        Font btnFont = new Font("Comic Sans MS", Font.PLAIN, 28);
-        
         choixColor = new JButton();
-        choixColor.setBounds(200, 30, 140, 18);
+        choixColor.setBounds(310, 30, 140, 18);
         choixColor.setText("Toggle colors");
         choixColor.setBackground(Color.GREEN.darker());
         choixColor.setForeground(Color.WHITE);
         choixColor.setCursor(new Cursor(Cursor.HAND_CURSOR));
         choixColor.addActionListener(event -> themeColor());
         window.add(choixColor);
-
-        int wBtn = 80;// Width Button
-        // Height Button
-        int hBtn = 70;
-        int marginX = 20;
-        int marginY = 60;
-        int[] x = {marginX, marginX + 90, 200, 290};
-        int[] y = {marginY, marginY + 100, marginY + 180, marginY + 260, marginY + 340, marginY + 420};
-
+        
         inText = new JTextField("0");
-        inText.setBounds(x[0],y[0],350,70);
+        inText.setBounds(x[0],y[0],450,70);
         inText.setEditable(false);
         inText.setBackground(Color.WHITE);
         inText.setFont(new Font("Comic Sans MS", Font.PLAIN, 33));
         window.add(inText);
-        
-        otherBtn cB=new cBtn("C",x[0],y[1],wBtn,hBtn,btnFont,inText,window,go,addWrite,val,opt);
-        otherElseBtn.add(cB);
-        otherBtn backB=new backBtn("<-",x[1],y[1],wBtn,hBtn,btnFont,inText,window);
-        otherElseBtn.add(backB);
-        otherBtn equalB=new equalBtn("=",x[2],y[5],2*wBtn+10, hBtn,btnFont,new Cursor(Cursor.HAND_CURSOR), inText,window,go,addWrite,val,opt,operateBtn);
-        otherElseBtn.add(equalB);
-        otherBtn pointB=new pointBtn(".",x[0],y[5],wBtn,hBtn,btnFont,inText,window, go,addWrite);
-        otherElseBtn.add(pointB);
-        
-        optBtn addB=new addBtn("+",x[3], y[4],wBtn, hBtn,btnFont,new Cursor(Cursor.HAND_CURSOR), inText,window,go,addWrite,val,opt);
-        operateBtn.add(addB);
-        optBtn subB=new subBtn("-",x[3], y[3],wBtn, hBtn,btnFont,new Cursor(Cursor.HAND_CURSOR), inText,window,go,addWrite,val,opt);
-        operateBtn.add(subB);
-        optBtn mulB=new mulBtn("*",x[3], y[2],wBtn, hBtn,btnFont,new Cursor(Cursor.HAND_CURSOR), inText,window,go,addWrite,val,opt);
-        operateBtn.add(mulB);
-        optBtn divB=new divBtn("/",x[3], y[1],wBtn, hBtn,btnFont,new Cursor(Cursor.HAND_CURSOR), inText,window,go,addWrite,val,opt);
-        operateBtn.add(divB);
-        optBtn modB=new modBtn("%",x[2], y[1],wBtn, hBtn,btnFont,new Cursor(Cursor.HAND_CURSOR), inText,window,go,addWrite,val,opt);
-        operateBtn.add(modB);
+
+        setOptBtn();
+        setOtherBtn();
+        setNumBtn();
         
         window.setLayout(null);
         window.setResizable(false);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // If Click into The Red Button => End The Processus
         window.setVisible(true);
-        
-        //¼Æ¦r«ö¶sªì©l¤Æ
-        numBtn btn0=new numBtn("0",x[1],y[5],wBtn,hBtn,btnFont,inText,window,go,addWrite);
-        numberBtn.add(btn0);
-        numBtn btn1=new numBtn("1",x[0],y[4],wBtn,hBtn,btnFont,inText,window,go,addWrite);
-        numberBtn.add(btn1);
-        numBtn btn2=new numBtn("2",x[1],y[4],wBtn,hBtn,btnFont,inText,window,go,addWrite);
-        numberBtn.add(btn2);
-        numBtn btn3=new numBtn("3",x[2],y[4],wBtn,hBtn,btnFont,inText,window,go,addWrite);
-        numberBtn.add(btn3);
-        numBtn btn4=new numBtn("4",x[0],y[3],wBtn,hBtn,btnFont,inText,window,go,addWrite);
-        numberBtn.add(btn4);
-        numBtn btn5=new numBtn("5",x[1],y[3],wBtn,hBtn,btnFont,inText,window,go,addWrite);
-        numberBtn.add(btn5);
-        numBtn btn6=new numBtn("6",x[2],y[3],wBtn,hBtn,btnFont,inText,window,go,addWrite);
-        numberBtn.add(btn6);
-        numBtn btn7=new numBtn("7",x[0],y[2],wBtn,hBtn,btnFont,inText,window,go,addWrite);
-        numberBtn.add(btn7);
-        numBtn btn8=new numBtn("8",x[1],y[2],wBtn,hBtn,btnFont,inText,window,go,addWrite);
-        numberBtn.add(btn8);
-        numBtn btn9=new numBtn("9",x[2],y[2],wBtn,hBtn,btnFont,inText,window,go,addWrite);
-        numberBtn.add(btn9);
+       
     }
 
     private void themeColor() {
@@ -161,8 +121,60 @@ public class Calculator {
             bool = true;
         }
         
-}
+    }
+    
+    private void setNumBtn() {
+    	numBtn btn0=new numBtn("0",x[1],y[5],wBtn,hBtn,btnFont,inText,window,go,addWrite);
+        numberBtn.add(btn0);
+        numBtn btn1=new numBtn("1",x[0],y[4],wBtn,hBtn,btnFont,inText,window,go,addWrite);
+        numberBtn.add(btn1);
+        numBtn btn2=new numBtn("2",x[1],y[4],wBtn,hBtn,btnFont,inText,window,go,addWrite);
+        numberBtn.add(btn2);
+        numBtn btn3=new numBtn("3",x[2],y[4],wBtn,hBtn,btnFont,inText,window,go,addWrite);
+        numberBtn.add(btn3);
+        numBtn btn4=new numBtn("4",x[0],y[3],wBtn,hBtn,btnFont,inText,window,go,addWrite);
+        numberBtn.add(btn4);
+        numBtn btn5=new numBtn("5",x[1],y[3],wBtn,hBtn,btnFont,inText,window,go,addWrite);
+        numberBtn.add(btn5);
+        numBtn btn6=new numBtn("6",x[2],y[3],wBtn,hBtn,btnFont,inText,window,go,addWrite);
+        numberBtn.add(btn6);
+        numBtn btn7=new numBtn("7",x[0],y[2],wBtn,hBtn,btnFont,inText,window,go,addWrite);
+        numberBtn.add(btn7);
+        numBtn btn8=new numBtn("8",x[1],y[2],wBtn,hBtn,btnFont,inText,window,go,addWrite);
+        numberBtn.add(btn8);
+        numBtn btn9=new numBtn("9",x[2],y[2],wBtn,hBtn,btnFont,inText,window,go,addWrite);
+        numberBtn.add(btn9);
+    }
    
+    private void setOptBtn() {
+    	optBtn addB=new addBtn("+",x[3], y[4],wBtn, hBtn,btnFont,new Cursor(Cursor.HAND_CURSOR), inText,window,go,addWrite,val,opt);
+        operateBtn.add(addB);
+        optBtn subB=new subBtn("-",x[3], y[3],wBtn, hBtn,btnFont,new Cursor(Cursor.HAND_CURSOR), inText,window,go,addWrite,val,opt);
+        operateBtn.add(subB);
+        optBtn mulB=new mulBtn("*",x[3], y[2],wBtn, hBtn,btnFont,new Cursor(Cursor.HAND_CURSOR), inText,window,go,addWrite,val,opt);
+        operateBtn.add(mulB);
+        optBtn divB=new divBtn("/",x[3], y[1],wBtn, hBtn,btnFont,new Cursor(Cursor.HAND_CURSOR), inText,window,go,addWrite,val,opt);
+        operateBtn.add(divB);
+        optBtn modB=new modBtn("%",x[2], y[1],wBtn, hBtn,btnFont,new Cursor(Cursor.HAND_CURSOR), inText,window,go,addWrite,val,opt);
+        operateBtn.add(modB);
+        optBtn powB=new powBtn("^",390, y[1],wBtn, hBtn,btnFont,new Cursor(Cursor.HAND_CURSOR), inText,window,go,addWrite,val,opt);
+        operateBtn.add(powB);
+        optBtn rootB=new rootBtn("¡Ô",390, y[2],wBtn, hBtn,btnFont,new Cursor(Cursor.HAND_CURSOR), inText,window,go,addWrite,val,opt);
+        operateBtn.add(rootB);
+    }
+    
+    private void setOtherBtn() {
+    	
+        otherBtn cB=new cBtn("C",x[0],y[1],wBtn,hBtn,btnFont,inText,window,go,addWrite,val,opt);
+        otherElseBtn.add(cB);
+        otherBtn backB=new backBtn("<-",x[1],y[1],wBtn,hBtn,btnFont,inText,window);
+        otherElseBtn.add(backB);
+        otherBtn equalB=new equalBtn("=",x[2],y[5],3*wBtn+20, hBtn,btnFont,new Cursor(Cursor.HAND_CURSOR), inText,window,go,addWrite,val,opt,operateBtn);
+        otherElseBtn.add(equalB);
+        otherBtn pointB=new pointBtn(".",x[0],y[5],wBtn,hBtn,btnFont,inText,window, go,addWrite);
+        otherElseBtn.add(pointB);
+    }
+    
     public static void main(String[] args) {
         new Calculator();
     }
